@@ -1,8 +1,8 @@
 {
-  "name": "GraphQL_API",
+  "name": "files_manager",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
     "lint": "./node_modules/.bin/eslint",
@@ -39,6 +39,7 @@
     "@babel/register": "^7.8.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.17.0",
