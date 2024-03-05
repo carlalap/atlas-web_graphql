@@ -83,11 +83,6 @@ $ npm -v
 
  <h2 class="gap">Tasks</h2>
 
-    <div data-role="task27255" data-position="1" id="task-num-0">
-      <div class="panel panel-default task-card " id="task-27255">
-
-<span id="user_id" data-id="6138"></span>
-
   <div class="panel-heading panel-heading-actions">
     <h3 class="panel-title">
       0. GraphQL Schema
@@ -127,7 +122,7 @@ now listening for request on port 4000
 
 <p>You will obtain in the browser <a href="/rltoken/KohFJj0zeWT_A7T56rY-tQ" title="http://localhost:4000/graphql" target="_blank">http://localhost:4000/graphql</a> the following error:</p>
 
-<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/de16a4b57a0a93d20c8a56f51bc7d48560700543.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240304%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240304T144714Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6ca95e6de5dac78ccfc8b2cd1ba9e696a16fa3d0c7cca16cc936a67b3a372cda" alt="" loading='lazy' style="" /></p>
+![image](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/de16a4b57a0a93d20c8a56f51bc7d48560700543.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240304%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240304T144714Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6ca95e6de5dac78ccfc8b2cd1ba9e696a16fa3d0c7cca16cc936a67b3a372cda)
 
 <p>From the message you can understand that we must pass an object which contains the schema property.</p>
 
