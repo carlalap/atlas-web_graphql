@@ -214,16 +214,17 @@ In the resolve function, use the id from args parameter to find the task of a gi
 <p>In the file <code>app.js</code>, add the property <strong>graphiql: true</strong> to the graphqlHTTP constructor to be able to use <strong>GraphiQL</strong>: a great tool to test GraphQL API obtained in the link <a href="/rltoken/KohFJj0zeWT_A7T56rY-tQ" title="http://localhost:4000/graphql" target="_blank">http://localhost:4000/graphql</a>.
 Before adding graphiql: true, you will get the following error:</p>
 
-<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/37d8fe34bd79f0d9ded519b452e97b1afa7c8556.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240305%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240305T141403Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=d36ea030b63cdcd1520502f0db33716b3ba5b633cb5f9c6f29b1d48223493db7" alt="" loading='lazy' style="" />
+![image](images/error_task2-0.png)
+
 After adding the property. when you visit the <a href="/rltoken/KohFJj0zeWT_A7T56rY-tQ" title="http://localhost:4000/graphql" target="_blank">http://localhost:4000/graphql</a> URL, you will see GraphiQL in action:</p>
 
-<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/aafcfa4f93c4ce33ee2bdcf9de0bc96281496b56.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240305%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240305T141403Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=aea72d3e6d9186a1e745d47b6976162f94f5507e31373a1d0b499d6980aabb6d" alt="" loading='lazy' style="" /></p>
+![image](images/task2-1.png)
 
 <p>When you click <strong>Docs</strong> in the top right of Graphiql, you will see in Root types: <code>query: RootQueryType</code>.</p>
 
 <p>the following figure shows that:</p>
 
-<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/32e95d38ff2300949783d43bc80c431420d3be5c.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240305%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240305T141403Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=81a1fbaf69288dc1aae97440bd73ecbdbbbf17a0702cadd4a0a4ac4f7611baa9" alt="" loading='lazy' style="" /></p>
+![image](images/task2-2.png)
 
 <p>This panel is going to tell you about the GraphQL server that you are making queries to. In our case, it
 will give an idea about the properties used in the object Task and show how to make a request for a Task using the id.</p>
@@ -348,7 +349,7 @@ TaskType and PojectType respectively. In the resolve functions of each field, re
 the description of all the projects and the title and the description of their tasks. The result of your
 query will be like in the following figure:</p>
 
-<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/b69d72d3c154338d8d9ad09eb53b784bca4aabbe.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240305%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240305T141403Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=d5f384de75daf6925853aaf052d3ad8ec0924308ec51f9a9bf3b77d33345f1ce" alt="" loading='lazy' style="" /></p>
+![image](images/task5_image.png)
 
 <p>You can also test the output of the query that will give all the tasks.</p>
 
