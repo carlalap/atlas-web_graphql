@@ -4,7 +4,6 @@ Background Context
 
 In this project, you will create an application using a query language, designed to make APIs fast, flexible and developer-friendly. In the first part, you will create the back-end part using ExpressJs and set up GraphQl with all the parts (schema, root query and resolve function). In second part, you will connect your back-end to mongoDB and test your queries to GraphQL server using Graphiql. In the last part, you will create the front-end part using ReactJS and the GraphQL Client Apollo.
 
-
 <h2>Resources</h2>
 
 <p><strong>Read or watch</strong>:</p>
@@ -77,7 +76,7 @@ $ npm -v
 
 <h2>Walk of the final graph</h2>
 
-<p><img src="![alt text](images/yGraphQL.png)
+<p><img src="![alt text](images/GraphQL.png)
 " alt="" loading='lazy' style="" /></p>
 
   </div>
@@ -87,7 +86,8 @@ $ npm -v
 
     <div data-role="task27255" data-position="1" id="task-num-0">
       <div class="panel panel-default task-card " id="task-27255">
-  <span id="user_id" data-id="6138"></span>
+
+<span id="user_id" data-id="6138"></span>
 
   <div class="panel-heading panel-heading-actions">
     <h3 class="panel-title">
