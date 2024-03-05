@@ -76,8 +76,7 @@ $ npm -v
 
 <h2>Walk of the final graph</h2>
 
-<p><img src="![image](images/GraphQL.png)
-" alt="" loading='lazy' style="" /></p>
+![image](images/GraphQL.png)
 
   </div>
 </div>
