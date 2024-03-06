@@ -8,3 +8,18 @@
     }
   }
 }
+
+// test result in GraphiQL  http://localhost:4000/graphql
+// message output:
+{
+  "data": {
+    "task": {
+      "title": "Create your first webpage",
+      "weight": 1,
+      "description": "Create your first HTML file 0-index.html with: -Add the doctype on the first line (without any comment) -After the doctype, open and close a html tag Open your file in your browser (the page should be blank)",
+      "project": {
+        "title": "Advanced HTML"
+      }
+    }
+  }
+}
