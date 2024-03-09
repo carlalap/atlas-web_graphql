@@ -1,10 +1,10 @@
 /* Script use to Connect to mongoDB Atlas database
 * exec:  npm start from the package.json file
 */
-const { graphqlHTTP } = require('express-graphql');
 const express = require('express');
-const mongoose = require('mongoose');
+const { graphqlHTTP } = require('express-graphql');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const schema = require('./schema/schema');
 
 const app = express();
@@ -17,6 +17,11 @@ mongoose.connect('mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net
   useUnifiedTopology: true,
 });
 
+// Database connection success/error handling
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+
 mongoose.connection.once('open', () => {
   console.log('connected to database');
 });
@@ -27,7 +32,10 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true, // Enables the GraphiQL interface
 }));
 
+/* app.use('/graphql', graphqlHTTP({
+})); */
+
 // Listening for requests on port 8080
-app.listen(8080, () => {
-  console.log('now listening for request on port 8080');
+app.listen(4000, () => {
+  console.log('now listening for request on port 4000\n');
 });

@@ -1,7 +1,6 @@
-/* Script use it from task0 to task5 
-* run 
+/* Script use it from task0 to task5
+* run npm start
 */
-
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/schema'); // check path file

@@ -1,10 +1,10 @@
 // task6.  Creating a TAsk model
 // import mongoose from 'mongoose';
-const mongoose = require('mongoose');
 
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const TaskSchema = new Schema({
+const TaskSchema = new Schema ({
   title: String,
   weight: Number,
   description: String,

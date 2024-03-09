@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const TaskSchema = new Schema({
+const ProjectSchema = new Schema({
   title: String,
   weight: Number,
   description: String,
   projectId: String,
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+module.exports = mongoose.model('Project', ProjectSchema);
