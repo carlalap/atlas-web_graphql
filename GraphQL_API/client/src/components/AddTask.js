@@ -1,3 +1,5 @@
+// task10. Making queries from React
+// client/src/components/AddTask.js
 import {
   useState,
   //useEffect
@@ -8,7 +10,7 @@ import { getProjectQuery, addTaskMutation, getTaskQuery } from "../queries/queri
 
 
 function AddTask(props) {
-
+  
   const [inputs, setInputs] = useState({
     title: '',
     weight: 1,
@@ -18,7 +20,7 @@ function AddTask(props) {
 
   function displayProjects() {
     //  console.log(props);
-    const data = props.getProjectQuery;
+    var data = props.getProjectQuery;
     if (data.loading) {
       return (<option disabled> Loading projects... </option>);
       } else {

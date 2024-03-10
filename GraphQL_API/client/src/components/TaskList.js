@@ -3,7 +3,9 @@ import { useState, //useEffect
 // components
 import TaskDetails from './TaskDetails';
 import { graphql } from 'react-apollo';
-import { getTasksQuery } from '../queries/queries'; 
+import { getProjectsQuery, addTaskMutation, getTasksQuery } from "../queries/queries";
+
+
 
 
 function TaskList(props) {
@@ -22,14 +24,13 @@ function TaskList(props) {
         return data.tasks.map(task => {
             return ( 
             <li key = { task.id } onClick = { (e) => {
-                  setState({
-                    selected: task.id 
-                    });
-                  }} > { task.title } 
+                  setState({ selected: task.id });
+                  }} > 
+                  { task.title } 
             </li>);
-            })
-        },
-     },
+            });
+        }
+     }
 
   return (
     <div>
