@@ -3,20 +3,19 @@
 */
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const schema = require('./schema/schema');
+// const cors = require('cors');
 
 const app = express();
 
+// Allow cross-origin requests
 app.use(cors());
 
-// Connect to the database
-mongoose.connect('mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net/', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// its connect to the database
+const mongoDB = 'mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net/';
 
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 // Database connection success/error handling
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
@@ -26,14 +25,16 @@ mongoose.connection.once('open', () => {
   console.log('connected to database');
 });
 
-// Use the graphqlHTTP middleware with your schema
-app.use('/graphql', graphqlHTTP({
-  schema, // Make sure this references the schema you've defined
-  graphiql: true, // Enables the GraphiQL interface
-}));
+/* // Connect to the database
+mongoose.connect('mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}); */
 
-/* app.use('/graphql', graphqlHTTP({
-})); */
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true,
+}));
 
 // Listening for requests on port 8080
 app.listen(4000, () => {

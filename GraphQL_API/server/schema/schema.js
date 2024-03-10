@@ -27,6 +27,7 @@ const projects = [
   { id: '2', title: 'Bootstrap', weight: 1, description: 'Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains CSS and JavaScript design templates for typography, forms, buttons, navigation, and other interface components.'},
 ]; */
 
+// Schema definition
 // Creates GraphQLObjectType: TaskType which contains 2 parameters (Tawsk, fields)
 const TaskType = new GraphQLObjectType({
   name: 'Task',
@@ -36,7 +37,7 @@ const TaskType = new GraphQLObjectType({
     weight: { type: GraphQLInt },
     description: { type: GraphQLString },
     project: {
-      type: ProjectType, // Lazy loading
+      type: Project, // Lazy loading
       resolve(parent, args) {
         return Project.findById(parent.projectId);
         // return _.find(projects, { id: parent.projectId });
@@ -63,6 +64,7 @@ const ProjectType = new GraphQLObjectType({
   }),
 });
 
+
 /* Creates type that represents all of the possible entry points into the GraphQL API,
  * create a root query to query for a particular task
 */
@@ -71,7 +73,7 @@ const RootQueryType = new GraphQLObjectType({
   fields: {
     task: {
       type: TaskType,
-      args: { id: { type: GraphQLID } },
+      args: { id: { type: GraphQLString } },
       resolve(parent, args) {
         // return _.find(tasks, { id: args.id }); // use lodash
         return Task.findById(args.id);
@@ -113,13 +115,13 @@ const Mutation = new GraphQLObjectType({
         projectId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
-        const project = new Project({
+        const newproject = new Project({
           title: args.title,
           weight: args.weight,
           description: args.description,
         });
         // save project in database
-        return project.save();
+        return newproject.save();
       },
     },
   },
@@ -132,20 +134,21 @@ const Mutation = new GraphQLObjectType({
       projectId: { type: new GraphQLNonNull(GraphQLID) },
     },
     resolve(parent, args) {
-      const task = new Task({
+      const newtask = new Task({
         title: args.title,
         weight: args.weight,
         description: args.description,
         projectId: args.projectId,
       });
       // save task in database
-      return task.save();
+      return newtask.save();
     },
   },
 });
 
 // Exportin Schema
-module.exports = new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: RootQueryType,
   mutation: Mutation,
 });
+module.exports = schema;
