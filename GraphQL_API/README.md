@@ -74,6 +74,19 @@ $ npm -v
 <pre><code>npm i apollo-boost graphql react-apollo --save
 </code></pre>
 
+<h3>Other Useful Commands</h3>
+
+<pre><code>npm/npx start
+</code></pre>
+<pre><code>service redis-server start
+</code></pre>
+<pre><code>redis-cli ping  //Expected output:  PONG
+</code></pre>
+<pre><code>service mongod start
+</code></pre>
+<pre><code>service mongod status
+</code></pre>
+
 <h2>Walk of the final graph</h2>
 
 ![image](images/GraphQL.png)
@@ -354,3 +367,497 @@ query will be like in the following figure:</p>
 <p>You can also test the output of the query that will give all the tasks.</p>
 
   </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      6. Connecting to mongoDB Atlas and create mongoose models
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>You will add in this task a database instead of using examples.</p>
+
+<p>Open this link: <a href="https://www.mongodb.com/" title="www.mongodb.com" target="_blank">www.mongodb.com</a> and create an account. Add a new database user, well save the username and the password then create a new database.</p>
+
+<p>To use mongoDB in your application:</p>
+
+<p>install a new package mongoose by using the following command: <code>npm install mongoose –save</code>.</p>
+
+<p>In the file <code>app.js</code>:</p>
+
+<ul>
+<li> Require mongoose in the const <strong>mongoose</strong></li>
+<li> Connect to mongoDB Atlas database using the string generated in the cluster in MongoDB Atlas.</li>
+<li> Add this code:</li>
+</ul>
+
+<pre><code>  mongoose.connection.once(’open’, () =&gt;
+  console.log(’connected to database’);
+  );
+</code></pre>
+
+<p>⇒ an event listener returns a the message &ldquo;connected to database&rdquo; to the console once the connection is open.</p>
+
+<p>Before start putting data in the database, You need to create a model and schema for each data type to be stored inside the database.</p>
+
+<p>Create a new folder <strong>models</strong>. Inside the folder create two files <code>task.js</code> and <code>project.js</code>.</p>
+
+<p>In the file <code>task.js</code>:</p>
+
+<ul>
+<li> Require mongoose</li>
+<li> Create a constant Schema contains mongoose.Schema</li>
+<li> Create a schema for the task: <strong>taskSchema</strong>, then add the properties in the example tasks in the file <code>schema.js</code> with the adequate type (String, Number &hellip;) except the id because MongoDB is automatically going to create a new ID.</li>
+<li> Make sure you export the model, you define the model which will be the collection in MongoDB <strong>&ldquo;Task&rdquo;</strong> and base it to the particular schema <strong>&ldquo;taskSchema&rdquo;</strong></li>
+</ul>
+
+<p>In the file <code>project.js</code>: Do the same steps you did with the previous file. Just modify the properties, the name of schema to <strong>&ldquo;projectSchema&rdquo;</strong> and the collection name to <strong>&ldquo;Project&rdquo;</strong>.</p>
+
+<p><strong>Note</strong>: mongoose schema: you are going to create for your data that is being stored in a database.
+The schema used previously in the code for graphQL is defining the graph and the object types on that graph.</p>
+
+  </div>
+
+<div class="list-group">
+  <!-- Task URLs -->
+    <!-- Technical information -->
+     <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>atlas-web_graphql</code></li>
+            <li>Directory: <code>GraphQL_API</code></li>
+            <li>File: <code>server/app.js, server/models/task.js, server/models/project.js</code></li>
+        </ul>
+      </div>
+
+   <!-- Self-paced manual review -->
+  </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      7. Mutation
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>In this task, we will get an idea about mutations by using them to add project and task. </p>
+
+<p>In the file <code>schema.js</code>, create a new GraphQLObjectType <strong>Mutation</strong> with the name <strong>Mutation</strong> then create a field called <strong>addProject</strong>. So when you use addProject mutation, you will be able to add a project to the database.</p>
+
+<p>addProject property is going to be an object of the fields of <strong>const Mutation</strong>  where their properties are:</p>
+
+<ul>
+<li> type: ProjectType</li>
+<li> args
+When a user makes a mutation query from the front-end then he is expected to send some kind
+of data or arguments. Here to add a project your are expected to pass the title, the weight and the
+description throught to the graphQL server.
+Add these arguments and precise to each one the propertie type.</li>
+<li> resolve function where you should create new Project which will be imported from the models of the previous task and precise title, weight and description. Then, save the instance of the Project data type to the database (here you can understand the importance of mongoose) and return the results.</li>
+</ul>
+
+<p>Export the mutation after the query at the bottom of the file.</p>
+
+<p>To prevent users from making mutation without passing through any required fields, you should use the <strong>GraphQLNonNull</strong> type. Add new GraphQLNonNull to all the arguments of the mutation.</p>
+
+<p><strong>Remark</strong>: When you make a mutation, the ID will randomly generated that is why you wouldn’t add it in the arguments. </p>
+
+<p>To test your code you should try some examples in graphiql. In a file <code>graphiql7_1</code>, write the
+query that will give you the following output:</p>
+
+<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/6e2219f9e02149850bd3d27e33fcfe70a5ec09df.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240311%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240311T150633Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3590caccbf8e664dc0e35b7e6207b26b7bb0f72655a42811b3037299b2a3e1fe" alt="" loading='lazy' style="" /></p>
+
+<p>Do the same steps with the field <strong>addTask</strong> to add new task. and write in the file <code>graphiql7_2</code> the query which will give you the following output (the projectId should be one ID from the project(s) created previously)</p>
+
+<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2022/1/fce933a3da786f97d159623192384d3b3dfcab31.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240311%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240311T150633Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=ab4f3923346c062a1a2dcaae0ebc2d96bb61d37fabd08afa48b195338148e7e3" alt="" loading='lazy' style="" /></p>
+
+<p>You should always check the updates of data in mongodb.</p>
+
+  </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      8. Updating the resolve functions
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>In this task, instead of selecting data from the examples previously created in the task 2 and 3, you should find the data directly from the database. </p>
+
+<p>In the file <code>schema.js</code>, delete the 2 arrays of data: tasks and projects. In the resolve functions, delete any line of code using these two arrays and replace them by the code doing the same goal but by using the models: <strong>Project</strong> and <strong>Task</strong>.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+  <!-- Technical information -->
+   <div class="list-group-item">
+       <p><strong>Repo:</strong></p>
+      <ul>
+         <li>GitHub repository: <code>atlas-web_graphql</code></li>
+           <li>Directory: <code>GraphQL_API</code></li>
+            <li>File: <code>server/schema/schema.js</code></li>
+        </ul>
+      </div>
+
+  <!-- Self-paced manual review -->
+
+  </div>
+
+ <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      9. Add the front-end part and setup Apollo Client
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>Once the objective of this project in not to learn ReactJs, you will get the access to the project <a href="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/misc/2022/2/386bd2caeab79e068071bb2bb2638549f932d4b5.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240311%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240311T150633Z&X-Amz-Expires=345600&X-Amz-SignedHeaders=host&X-Amz-Signature=d8614c1ff7563b3e4a3e056bc0ec53540e91b7dc49942f5247d8922aaa889c3a" title="client.zip" target="_blank">client.zip</a> with the different components. </p>
+
+<p>In the folder client, run your react project by using the following commands:</p>
+
+<ul>
+<li> <code>npm install</code> </li>
+<li> <code>npm start</code></li>
+</ul>
+
+<p>To consume the APIs in the front-end part, you will use <strong>GraphQL Client Apollo</strong>: you can think about it as the thing that is in charge with the passage of data between the front-end and the server.</p>
+
+<p>Install apollo-boost, graphql and react-apollo in your project using the command in the description.</p>
+
+<p><strong>apollo-boost</strong> is a package contains several different packages including Apollo-client.</p>
+
+<p><strong>graphql</strong> is the js implementation of GraphQL</p>
+
+<p><strong>react-apollo</strong> is the layer to bind apollo with react.</p>
+
+<p>In the file <code>App.js</code>:</p>
+
+<ul>
+<li>Import ApolloClient from apollo -boost</li>
+<li>setup an apollo client (uri:’http://localhost:4000/graphql’). Once you create your client, hook it up to your app by passing it to the ApolloProvider imported from react-apollo (before the first div tag).</li>
+</ul>
+
+  </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      10. Making queries from React
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>In this task, you will make a queries from the different components of React application. </p>
+
+<p>To make a query from <strong>TaskList</strong> component, in the file <code>client/src/components/TaskList.js</code>:</p>
+
+<ul>
+<li> Import gql from  apollo-boost in order to construct the query because GraphQL query language in not Javascript. So, when we construct it you need the help of another package to help pass it all.</li>
+<li> Create a query and store it in a constant <strong>getTasksQuery</strong> that will give the id and the title of all the tasks (the syntax of the query is the same syntax of the queries tested in graphiql).</li>
+<li> Bind the query to the component to be able to access the data that comes from the query by importing <strong>graphql</strong> from the package <strong>react-apollo</strong> and modify the export to be like the following prototype:</li>
+</ul>
+
+<p><code>export default graphql(the query name)(the component name);</code></p>
+
+<p>Before moving to the other queries. When you add <code>console.log(props);</code> before the return, it is not going to work and you will get some errors in the console. These errors are related to the non ability to fetch the data from the server and the reason is because of access control allow origin. By default, GraphQL sever is not accepting requests from an other server (here front-end and back-end are coming from different servers).</p>
+
+<p>To solve this problem: </p>
+
+<p>In Express GraphQL server, install the package CORS:  <code>npm install cors -save</code> .</p>
+
+<p>In the file <code>server/app.js</code>: </p>
+
+<ul>
+<li>Require cors in a constant <strong>cors</strong></li>
+<li>Add the line of code <code>app.use(cors());</code> </li>
+</ul>
+
+<p>When you refresh your browser, you can see two objects in the console: </p>
+
+<ul>
+<li> the first one with <code>loading: true</code> and there is no data.</li>
+<li> the second one with <code>loading: false</code> and you can check the data returned by the query in the component.</li>
+</ul>
+
+<p>Once your objective here is to create the query. You should only add to the the file <code>client/src/components/TaskList.js</code> this function:</p>
+
+<pre><code>function displayTasks() {
+    console.log(props.data);
+    var data = props.data;
+
+    if (data.loading) {
+      return ( &lt; div &gt; Loading tasks... &lt; /div&gt;);
+      }
+      else {
+        return data.tasks.map(task =&gt; {
+            return ( &lt; li key = {
+                task.id
+              }
+              onClick = {
+                (e) =&gt; {
+                  setState({
+                    selected: task.id
+                  });
+                }
+              } &gt; {
+                task.title
+              } &lt; /li&gt;);
+            })
+        }
+     }
+</code></pre>
+
+<p>In the empty braces inside the <strong>ul</strong> tag, call the previous function.</p>
+
+<p>In the file <code>client/src/components/AddTask.js</code>, Create a query and store it in a constant <strong>getProjectsQuery</strong> that will give the id and the title of all the projects and from the previous part, redo finish the other steps. Then to add all the projects to the options of the Project field, call after the option inside the select tag the function <strong>displayProjects()</strong>:</p>
+
+<pre><code>function displayProjects() {
+    //  console.log(props);
+    var data = props.data;
+    if (data.loading) {
+      return ( &lt; option &gt; Loading projects... &lt; /option&gt;);
+      }
+      else {
+        return data.projects.map(project =&gt; {
+            return ( &lt; option key = {
+                project.id
+              }
+              value = {
+                project.id
+              } &gt; {
+                project.title
+              } &lt; /option&gt;);
+            })
+        }
+      }
+</code></pre>
+
+  </div>
+
+ <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      11. External query file
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>To avoid getting messy by defining the queries inside the component files especially when there is multiple queries in different components, you should externalize the queries into a separate file.</p>
+
+<p>Go into <strong>src</strong>, create the file <code>queries.js</code> inside the new folder <strong>queries</strong>.</p>
+
+<p>In the file <code>client/src/queries/queries.js</code>:</p>
+
+<ul>
+<li>Import <strong>gql</strong></li>
+<li>Paste all the queries created in the components</li>
+<li>Export the queries </li>
+</ul>
+
+<p>In the files of the components:</p>
+
+<ul>
+<li>Delete the queries</li>
+<li>Detete the line of code to import gql</li>
+<li>import the adequate query from the new file. </li>
+</ul>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+  <!-- Technical information -->
+   <div class="list-group-item">
+      <p><strong>Repo:</strong></p>
+      <ul>
+       <li>GitHub repository: <code>atlas-web_graphql</code></li>
+         <li>Directory: <code>GraphQL_API</code></li>
+         <li>File: <code>client/src/queries/queries.js, client/src/components/TaskList.js, client/src/components/AddTask.js</code></li>
+        </ul>
+      </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      12. Query variables and composing queries
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+   <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>In the file <code>client/src/queries/queries.js</code>, Create a query and store it in a constant <strong>addTaskMutation</strong> that will add a project using the mutation with three parameters: title, weight and description and will return the title and the id back.  In the mutation add query variables (example: <strong>$variable</strong>: <strong>String!</strong> or <strong>Int!</strong> or <strong>ID!</strong>) and affect to each parameter the adequate variable.
+Don&rsquo;t forget to export the new queries.</p>
+
+<p><strong>Remark:</strong> The mutation query to add a project should be written like the query tested in graphiql. Only you must add the variables.  </p>
+
+<p>In the file <code>client/src/components/AddTask.js</code>, import the mutation to be used when you submit the form. But now there are 2 different queries inside the component . So, at the bottom, you must bind both of these different queries to the component.</p>
+
+<p>Use compose method to bind the queries. To do that:</p>
+
+<ul>
+<li> Import  <strong>flowRight as compose</strong> from the package <strong>lodash</strong></li>
+<li> Use the word compose to bind the queries and give to each query a name property which will be the name of the query.</li>
+</ul>
+
+<p>When you check your browser, you will get an error related to the function <strong>displayProjects</strong> and when you check the <strong>props</strong> in the console, you will observe some modifications. Modify your variable <strong>data</strong> in the function to solve the problem and recheck the select field.</p>
+
+<p>In the form tag, affect the function <strong>submitForm</strong> to onSubmit. Complete the function by using <strong>addTaskMutation</strong> and specify the variables. Then add <strong>refetchQueries</strong> array contains the query to get all the tasks in order to be sure that the task added will not need a refresh to be added to the list of tasks.</p>
+
+<pre><code>const submitForm = (e) =&gt; {
+        e.preventDefault();
+        props./*......( { 
+                  variables: {......
+                    .....Add your 
+                    ..... code 
+                    },
+                    ......
+            });
+                */
+      }
+</code></pre>
+
+<p>Write the mutation query <strong>addProjectMutation</strong> to add a project. From the steps of the previous part complete the file <code>client/src/components/AddProject.js</code> and affect to onSubmit the function <strong>submitForm1</strong> contains the refetchQueries array.</p>
+
+  </div>
+
+  <div class="list-group">
+   <!-- Task URLs -->
+
+  <!-- Technical information -->
+   <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>atlas-web_graphql</code></li>
+            <li>Directory: <code>GraphQL_API</code></li>
+            <li>File: <code>client/src/queries/queries.js, client/src/components/AddTask.js, client/src/components/AddProject.js</code></li>
+        </ul>
+      </div>
+
+<div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      13. Tasks details query
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="6138"></span>
+
+  <!-- Progress vs Score -->
+
+  <!-- Task Body -->
+  <p>In the file <code>client/src/queries/queries.js</code>, create a query <strong>getTaskDetailQuery</strong> which will return the id, the title, the weight, the description and the project (id, title, weight, description and tasks: id, title, weight) of a task with the parameter id. Export the new query.</p>
+
+<p>The objective of this task is to write the query. So, just copy and paste the following code in the file <code>client/src/components/TaskDetails.js</code></p>
+
+<pre><code>import {
+  graphql
+} from &#39;react-apollo&#39;;
+import {
+  getTaskDetailQuery
+} from &#39;../queries/queries&#39;;
+
+function TaskDetails(props) {
+  console.log(props);
+
+  function displayTaskDetails() {
+    const {
+      task
+    } = props.data;
+    if (task) {
+      return ( &lt;div&gt;
+        &lt;h2&gt; Title of task: {
+          task.title
+        } &lt;/h2&gt; 
+        &lt;p&gt; Weight of the task: {
+          task.weight
+        } &lt;/p&gt; 
+        &lt;p&gt; Title of the project: {
+          task.project.title
+        } &lt;/p&gt; 
+        &lt;p&gt; All tasks of the project: &lt;/p&gt; 
+        &lt;ul className = &quot;other-tasks&quot; &gt; {
+          task.project.tasks.map(item =&gt; {
+            return &lt;li key = {
+              item.id
+            } &gt; {
+              item.title
+            } &lt; /li&gt;
+          })
+        } &lt;/ul&gt; 
+        &lt;/div&gt;
+      )
+    } else {
+      return ( 
+        &lt;div&gt; No task selected... &lt;/div&gt;
+      )
+    }
+  }
+  return ( &lt;
+    div id = &quot;task-details&quot; &gt; {
+      displayTaskDetails()
+    } &lt; /
+    div &gt;
+  );
+}
+
+
+export default graphql(getTaskDetailQuery, {
+  options: (props) =&gt; {
+    return {
+      variables: {
+        id: props.taskId
+      }
+    }
+  }
+})(TaskDetails);
+</code></pre>
+
+<p>In the file <code>client/src/components/TaskList.js</code>, in the component <strong>TaskDetails</strong> add <code>taskId = {state.selected}</code></p>
+
+  </div>
+
+ <div class="list-group">
+  <!-- Task URLs -->
+
+  <!-- Technical information -->
+   <div class="list-group-item">
+       <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>atlas-web_graphql</code></li>
+            <li>Directory: <code>GraphQL_API</code></li>
+            <li>File: <code>client/src/queries/queries.js, client/src/components/TaskList.js, client/src/components/TaskDetails.js</code></li>
+        </ul>
+      </div>

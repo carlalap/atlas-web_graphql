@@ -67,9 +67,4 @@ const getTaskDetailQuery = gql`
 }`;
 
 // Exporting Queries and Mutations
-export {
-    getTasksQuery,
-    getProjectsQuery,
-    addTaskMutation,
-    addProjectMutation,
-    getTaskDetailQuery };
+export { getTasksQuery, getProjectsQuery, addTaskMutation, addProjectMutation, getTaskDetailQuery };

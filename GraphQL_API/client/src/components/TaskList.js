@@ -3,9 +3,7 @@ import { useState, //useEffect
 // components
 import TaskDetails from './TaskDetails';
 import { graphql } from 'react-apollo';
-import { getProjectsQuery, addTaskMutation, getTasksQuery } from "../queries/queries";
-
-
+import { getTasksQuery } from "../queries/queries";
 
 
 function TaskList(props) {
@@ -35,7 +33,7 @@ function TaskList(props) {
   return (
     <div>
       <ul id="task-list">{displayTasks()}</ul>
-      <TaskDetails taskId={state.selected} />
+      <TaskDetails taskId={state.selected}/>
     </div>
   );
 }
