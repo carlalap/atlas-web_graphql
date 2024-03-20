@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 // its connect to the database
-const mongoDB = 'mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net/';
+const mongoDB = 'mongodb+srv://charlies:Pass012345@cluster0.rctegk2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 // Database connection success/error handling

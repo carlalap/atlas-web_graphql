@@ -37,7 +37,7 @@ const TaskType = new GraphQLObjectType({
     weight: { type: GraphQLInt },
     description: { type: GraphQLString },
     project: {
-      type: Project, // Lazy loading
+      type: ProjectType, // Lazy loading
       resolve(parent, args) {
         return Project.findById(parent.projectId);
         // return _.find(projects, { id: parent.projectId });
@@ -63,7 +63,6 @@ const ProjectType = new GraphQLObjectType({
     },
   }),
 });
-
 
 /* Creates type that represents all of the possible entry points into the GraphQL API,
  * create a root query to query for a particular task
@@ -112,36 +111,36 @@ const Mutation = new GraphQLObjectType({
         title: { type: new GraphQLNonNull(GraphQLString) },
         weight: { type: new GraphQLNonNull(GraphQLInt) },
         description: { type: new GraphQLNonNull(GraphQLString) },
-        projectId: { type: new GraphQLNonNull(GraphQLID) },
+        // projectId: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent, args) {
-        const newproject = new Project({
+      resolve: (parent, args) => {
+        const project = new Project({
           title: args.title,
           weight: args.weight,
           description: args.description,
         });
-        // save project in database
-        return newproject.save();
+          // save project in database
+        return project.save();
       },
     },
-  },
-  addTask: {
-    type: TaskType,
-    args: {
-      title: { type: new GraphQLNonNull(GraphQLString) },
-      weight: { type: new GraphQLNonNull(GraphQLInt) },
-      description: { type: new GraphQLNonNull(GraphQLString) },
-      projectId: { type: new GraphQLNonNull(GraphQLID) },
-    },
-    resolve(parent, args) {
-      const newtask = new Task({
-        title: args.title,
-        weight: args.weight,
-        description: args.description,
-        projectId: args.projectId,
-      });
-      // save task in database
-      return newtask.save();
+    addTask: {
+      type: TaskType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        projectId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve: (parent, args) => {
+        const task = new Task({
+          title: args.title,
+          weight: args.weight,
+          description: args.description,
+          projectId: args.projectId,
+        });
+        // save task in database
+        return task.save();
+      },
     },
   },
 });

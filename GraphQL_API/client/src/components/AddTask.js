@@ -27,7 +27,7 @@ function AddTask(props) {
   function displayProjects() {
     //  console.log(props);
     var data = props.getProjectQuery;
-    if (data.loading) {
+    if (data) {
       return (<option disabled> Loading projects... </option>);
       } else {
         return data.projects.map(project => {

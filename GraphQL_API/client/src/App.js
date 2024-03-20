@@ -12,13 +12,13 @@ import AddProject from './components/AddProject';
 
 // apollo client setup
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql'
+  uri: 'http://localhost:4000/graphql'
 });
 
 function App() {
   return (
     // Wrap the App component with the ApolloProvider and pass the client
-    <ApolloProvider client={client}>
+    <ApolloProvider client={ client }>
       <div id="main">
         <div id = "bg" > </div> 
         <h1> Holberton school tasks </h1> 

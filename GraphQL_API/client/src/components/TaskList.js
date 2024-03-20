@@ -1,5 +1,4 @@
-import { useState, //useEffect
-} from "react";
+import React, { useState } from "react";
 // components
 import TaskDetails from './TaskDetails';
 import { graphql } from 'react-apollo';
